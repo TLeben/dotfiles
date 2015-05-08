@@ -11,11 +11,20 @@ set expandtab " tabs are spaces
 set autoindent " align the new line indent with the prev line
 set shiftround " round indent to multiple of 'shiftwidth'
 
+let mapleader=","
+" add columns at 80 
+let &colorcolumn=join(range(81,999),",")
+" column at 80 and 120
+" let &colorcolumn="80,".join(range(120,999),",")
+" highlight ColorColumn ctermbg=235 guibg=#2c2d27
 " Color and syntax highlighting`
 syntax enable
+set background=dark
 colorscheme badwolf
 " badwolf options
 let g:badwolf_darkgutter = 1 "gutter darker than background
 " Make the tab line much lighter than the background.
-let g:badwolf_tabline = 3
 
+"indent lines
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
