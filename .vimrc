@@ -12,6 +12,9 @@ set autoindent " align the new line indent with the prev line
 set shiftround " round indent to multiple of 'shiftwidth'
 
 let mapleader=","
+" <leader> c redraws scrren & removes search highlighting
+nnoremap <leader>c :nohl<CR><C-l>
+
 " add columns at 80 
 let &colorcolumn=join(range(81,999),",")
 " column at 80 and 120
