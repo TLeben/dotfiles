@@ -1,4 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
-let g:netrw_dirhist_1='/Users/ty/tyDevel/libs/salsa_lite/runtime/language'
-let g:netrw_dirhist_2='/Users/ty/tyDevel/libs/salsa_lite/runtime'
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/home/tleben/api/models'
+let g:netrw_dirhist_2='/home/tleben/api'
+let g:netrw_dirhist_3='/home/tleben/api/data/languages'
+let g:netrw_dirhist_4='/home/tleben/accFields/api'
