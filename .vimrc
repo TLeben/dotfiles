@@ -11,8 +11,9 @@ set expandtab " tabs are spaces
 set autoindent " align the new line indent with the prev line
 set shiftround " round indent to multiple of 'shiftwidth'
 
-"escape from insert mode jk or ii
+"escape from insert mode jk, jj or ii
 imap jk <ESC>
+imap jj <ESC>
 imap ii <ESC>
 
 let mapleader=","
