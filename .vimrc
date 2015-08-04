@@ -17,6 +17,9 @@ set scrolloff=10 " scroll the window so we can alyways see ten lines around curs
 " autosave
 autocmd BufLeave,CursorHold,CursorHoldI,FocusLost * silent! wa
 
+" trim whitespace on save
+autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
+
 "F5 key to toggle bg light/dark 
 call togglebg#map("<F5>")
 
