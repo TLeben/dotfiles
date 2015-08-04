@@ -1,4 +1,5 @@
 execute pathogen#infect()
+set enc=utf-8
 set number " show line number
 set hlsearch " highlight matches
 set incsearch " search as chars are entered
@@ -20,13 +21,15 @@ autocmd BufLeave,CursorHold,CursorHoldI,FocusLost * silent! wa
 " trim whitespace on save
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
 
+"<F2> toggle paste & nopaste
+set pastetoggle=<F2>
+
 "F5 key to toggle bg light/dark 
 call togglebg#map("<F5>")
 
-"escape from insert mode jk, jj or ii
+"escape from insert mode jk or jj 
 imap jk <ESC>
 imap jj <ESC>
-imap ii <ESC>
 
 " tmux-navigation
 if exists('$TMUX')
