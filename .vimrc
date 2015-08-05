@@ -28,9 +28,6 @@ autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
 "<F2> toggle paste & nopaste
 set pastetoggle=<F2>
 
-" <F3> toggle NERDTree
-map <F NERDTreeToggle#map("<F3>")
-
 "F5 key to toggle bg light/dark 
 call togglebg#map("<F5>")
 
@@ -63,6 +60,9 @@ else
   map <C-k> <C-w>k
   map <C-l> <C-w>l
 endif
+
+" python-mode ----------------
+let g:pymode_rope=0
 
 let mapleader=","
 " <leader> c redraws scrren & removes search highlighting
