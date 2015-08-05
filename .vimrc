@@ -1,4 +1,7 @@
+filetype off
 execute pathogen#infect()
+filetype plugin indent on
+
 set enc=utf-8
 set number " show line number
 set hlsearch " highlight matches
@@ -22,17 +25,11 @@ autocmd BufLeave,CursorHold,CursorHoldI,FocusLost * silent! wa
 " trim whitespace on save
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
 
-" syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
 "<F2> toggle paste & nopaste
 set pastetoggle=<F2>
+
+" <F3> toggle NERDTree
+map <F NERDTreeToggle#map("<F3>")
 
 "F5 key to toggle bg light/dark 
 call togglebg#map("<F5>")
@@ -71,7 +68,7 @@ let mapleader=","
 " <leader> c redraws scrren & removes search highlighting
 nnoremap <leader>c :nohl<CR><C-l>
 "open explorer with ;;
-nnoremap <silent>;; :Ex<CR>
+nnoremap <silent>;; :NERDTreeToggle<CR>
 "split and edit .vimrc
 nnoremap <leader>ev :split $MYVIMRC<CR>
 "source vimrc
