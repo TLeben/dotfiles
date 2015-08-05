@@ -22,6 +22,15 @@ autocmd BufLeave,CursorHold,CursorHoldI,FocusLost * silent! wa
 " trim whitespace on save
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
 
+" syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 "<F2> toggle paste & nopaste
 set pastetoggle=<F2>
 
