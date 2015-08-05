@@ -1,4 +1,8 @@
+filetype off
 execute pathogen#infect()
+filetype plugin indent on
+
+set enc=utf-8
 set number " show line number
 set hlsearch " highlight matches
 set incsearch " search as chars are entered
@@ -7,23 +11,29 @@ set cursorline " highlights current line
 set ruler       " show cursor position in status bar
 set tabstop=4 " number of visual spaces per TAB
 set softtabstop=4 " number of spaces in tab when editing
+set textwidth=80 " wrap at 80 characters
 set shiftwidth=79 " lines longer than 79 columns will be broken
 set expandtab " tabs are spaces
 set autoindent " align the new line indent with the prev line
 set shiftround " round indent to multiple of 'shiftwidth'
 set backspace=indent,eol,start
 set scrolloff=10 " scroll the window so we can alyways see ten lines around cursor
- 
+set laststatus=2 " always show status line  
 " autosave
 autocmd BufLeave,CursorHold,CursorHoldI,FocusLost * silent! wa
+
+" trim whitespace on save
+autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
+
+"<F2> toggle paste & nopaste
+set pastetoggle=<F2>
 
 "F5 key to toggle bg light/dark 
 call togglebg#map("<F5>")
 
-"escape from insert mode jk, jj or ii
+"escape from insert mode jk or jj 
 imap jk <ESC>
 imap jj <ESC>
-imap ii <ESC>
 
 " tmux-navigation
 if exists('$TMUX')
@@ -51,11 +61,15 @@ else
   map <C-l> <C-w>l
 endif
 
+" python-mode ----------------
+let g:pymode_rope=0
+let g:pymode_folding=0
+
 let mapleader=","
 " <leader> c redraws scrren & removes search highlighting
 nnoremap <leader>c :nohl<CR><C-l>
 "open explorer with ;;
-nnoremap <silent>;; :Ex<CR>
+nnoremap <silent>;; :NERDTreeToggle<CR>
 "split and edit .vimrc
 nnoremap <leader>ev :split $MYVIMRC<CR>
 "source vimrc
@@ -76,20 +90,15 @@ else
     set background=dark
 endif
 
-"set t_Co=256 " 256 colors in terminal
-"let g:solarized_termcolors=256
+set t_Co=256
 
 if has('gui_gnome')
     set guifont=Ubuntu\ Mono 9.4
 endif
-" add columns at 80 
-if exists('+colorcolumn')
-    let &colorcolumn="80,".join(range(120,500),",")
-else "vim < 7.3
-    autocmd BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%80v.\+', -1)
-endif
 
-highlight ColorColumn ctermbg=235 guibg=#2c2d27
+" solarized tweeks, ignored if not using colorscheme
+let g:solarized_termtrans=1
+let g:solarized_termcolors=16
 
 " Color and syntax highlighting
 syntax enable
@@ -101,6 +110,15 @@ for scheme in [ 'solarized', 'molokai' ]
         continue
     endtry
 endfor
+
+" add columns at 80 
+highlight ColorColumn ctermbg=235
+if exists('+colorcolumn')
+    let &colorcolumn="80,".join(range(120,500),",")
+else "vim < 7.3
+    autocmd BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%80v.\+', -1)
+endif
+
 " badwolf options
 "let g:badwolf_darkgutter = 1 "gutter darker than background
 " Make the tab line much lighter than the background.
