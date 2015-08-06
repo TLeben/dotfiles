@@ -65,7 +65,9 @@ endif
 " ...options
 let g:pymode_rope=0
 let g:pymode_folding=0
+let g:pymode_lint_on_write=0
 let g:pymode_lint_checkers=['pyflakes', 'pep8']
+let g:pymode_lint_ignore="E501"
 " ...pymode key mapping
 nnoremap <silent><F6> :PymodeLint<CR> 
 nnoremap <silent><F7> :PymodeLintAuto<CR> 
