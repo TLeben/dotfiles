@@ -62,8 +62,14 @@ else
 endif
 
 " python-mode ----------------
+" ...options
 let g:pymode_rope=0
 let g:pymode_folding=0
+let g:pymode_lint_checkers=['pyflakes', 'pep8']
+" ...pymode key mapping
+nnoremap <silent><F6> :PymodeLint<CR> 
+nnoremap <silent><F7> :PymodeLintAuto<CR> 
+nnoremap <silent><F8> :PymodeLintToggle<CR>
 
 let mapleader=","
 " <leader> c redraws scrren & removes search highlighting
