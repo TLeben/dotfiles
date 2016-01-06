@@ -91,6 +91,8 @@ nnoremap <silent>;; :NERDTreeToggle<CR>
 nnoremap <leader>ev :split $MYVIMRC<CR>
 "source vimrc
 nnoremap <leader>sv :source $MYVIMRC<CR>
+"format JSON
+map <leader>j :%!python -m json.tool<CR>
 
 "---------------Appearance
 if has('gui_running')
