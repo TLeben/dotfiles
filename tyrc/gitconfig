@@ -1,0 +1,20 @@
+[alias]
+    co = checkout
+    cm = commit
+    st = status
+    br = branch
+    type = cat-file -t
+    dump = cat-file -p
+[user]
+	email = YourEmailL@HERE 
+	name = UserName 
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
+[difftool]
+	prompt = true
+[push]
+	default = simple
+[core]
+	editor = vim
