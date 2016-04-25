@@ -25,6 +25,9 @@ autocmd BufLeave,CursorHold,CursorHoldI,FocusLost * silent! wa
 " trim whitespace on save
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
 
+" convert tabs to spaces on save
+autocmd BufWritePre *.py retab!
+
 "<F2> toggle paste & nopaste
 set pastetoggle=<F2>
 
