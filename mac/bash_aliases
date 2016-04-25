@@ -1,0 +1,19 @@
+
+# system aliases
+alias ~='cd ~' 
+# G-colorize; F- @, /, * at end of symlinks, dirs, executable
+# h-use byte, kilo, etc when using -l
+alias ls='ls -GFh'
+# A-show all except ./ & ../
+alias la='ls -A'
+# l-list long format
+alias ll='la -l'
+alias ..='cd ..'
+alias h=history
+
+#   finderShowHidden:   Show hidden files in Finder
+#   finderHideHidden:   Hide hidden files in Finder
+#   -------------------------------------------------------------------
+alias finderShowHidden='defaults write com.apple.finder ShowAllFiles TRUE'
+alias finderHideHidden='defaults write com.apple.finder ShowAllFiles FALSE'
+

@@ -1,0 +1,115 @@
+
+#  1.  Source any aditional files
+#   ------------------------------------------------------------
+#  bashrc
+if [ -f ~/.bashrc ]; then
+    source ~/.bashrc
+fi
+
+#  alias file
+if [ -f ~/.bash_aliases ]; then
+    source ~/.bash_aliases
+fi
+
+#  git completion
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+    source `brew --prefix`/etc/bash_completion
+fi
+
+#  git flow completion
+if [ -f `brew --prefix`/etc/bash_completion.d/git-flow-completion.bash ]; then
+    source `brew --prefix`/etc/bash_completion.d/git-flow-completion.bash
+fi
+
+#  docker-compose
+if [ -f `brew --prefix`/etc/bash_completion.docker-compose ]; then
+    source `brew --prefix`/etc/bash_completion.d/docker-compose
+fi
+
+#  docker-machine
+if [ -f `brew --prefix`/etc/bash_completion.docker-machine-completion.bash ]; then
+    source `brew --prefix`/etc/bash_completion.d/docker-machine-completion.bash
+fi
+
+#  docker
+if [ -f `brew --prefix`/etc/bash_completion.docker-completion.bash ]; then
+    source `brew --prefix`/etc/bash_completion.d/docker-completion.bash
+fi
+
+# setup docker-machine buzz environment if vm buzz is running 
+if docker-machine status buzz | grep -lq "^Running"; then
+    echo "To infinity and beyond..."
+    eval $(docker-machine env buzz)
+fi
+
+eval "`pip completion --bash`"
+
+#   2. Modify Terminal 
+#   ------------------------------------------------------------
+#   Set default blocksize for ls, df, du
+export BLOCKSIZE=1k
+
+#   Use vim as default editor.
+export VISUAL=vim
+export EDITOR='$VISUAL'
+
+#   Colors
+export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$"
+# use color set in LSCOLORS
+
+export CLICOLOR=1
+#    LSCOLOR info. format is <fb> for each attribute. f(oreground) & b(ackground)
+# Attributes: 1.  directory        7.  character special
+#             2.  symbolic link    8.  executable with setuid bit set
+#             3.  socket           9.  executable with setgid bit set
+#             4.  pipe            10. directory writable to others, with sticky bit
+#             5.  executable      11. directory writable to others, without sticky bit
+#             6.  block special
+#
+# Colors: a     black              A     bright black
+#         b     red                B     bright red
+#         c     green              C     bright green
+#         d     brown              D     bright brown
+#         e     blue               E     bright blue
+#         f     magenta            F     bright magenta
+#         g     cyan               G     bright cyan
+#         h     light grey         H     bright light grey
+
+#               1-2-3-4-5-6-7-8-9-0-1-2-
+export LSCOLORS=exFxBxDxcxegedababagacad
+
+# JAVA_HOME
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home
+
+# GO
+export GOPATH=$HOME/go
+eval $(go env)
+
+# iterm terminal integration
+test -e ${HOME}/.iterm2_shell_integration.bash && source ${HOME}/.iterm2_shell_integration.bash
+
+#   3. Scripts
+#   ---------------------------------------------------------
+#   extract:  Extract most know archives with one command
+extract () {
+    if [ -f $1 ] ; then
+        case $1 in
+        *.tar.bz2)   tar xjf $1     ;;
+        *.tar.gz)    tar xzf $1     ;;
+        *.bz2)       bunzip2 $1     ;;
+        *.rar)       unrar e $1     ;;
+        *.gz)        gunzip $1      ;;
+        *.tar)       tar xf $1      ;;
+        *.tbz2)      tar xjf $1     ;;
+        *.tgz)       tar xzf $1     ;;
+        *.zip)       unzip $1       ;;
+        *.Z)         uncompress $1  ;;
+        *.7z)        7z x $1        ;;
+        *)     echo "'$1' cannot be extracted via extract()" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+
