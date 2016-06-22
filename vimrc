@@ -1,6 +1,8 @@
 filetype off
-execute pathogen#infect()
+call pathogen#infect()
+call pathogen#helptags()
 filetype plugin indent on
+syntax on
 
 set enc=utf-8
 set number " show line number
@@ -71,6 +73,8 @@ let g:pymode_folding=0
 let g:pymode_lint_on_write=0
 let g:pymode_lint_checkers=['pyflakes', 'pep8']
 let g:pymode_lint_ignore="E501"
+let g:pymode_syntax_slow_sync=1
+let g:pymode_syntax_all=1
 " ...pymode key mapping
 nnoremap <silent><F6> :PymodeLint<CR> 
 nnoremap <silent><F7> :PymodeLintAuto<CR> 
@@ -82,7 +86,7 @@ nnoremap <silent><F8> :PymodeLintToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " close vim if nerdTree is the only window open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " custom key mappings, leader = , ** comma
 let mapleader=","
