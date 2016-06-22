@@ -5,9 +5,10 @@
     br = branch
     type = cat-file -t
     dump = cat-file -p
+    cleanup = "!git branch --merged | grep -v '\\*\\|master\\|development' | xargs -n 1 git branch -d"
 [user]
-	email = YourEmailL@HERE 
-	name = UserName 
+	email = tleben@iteris.com
+	name = tleben
 [diff]
 	tool = vimdiff
 [merge]
