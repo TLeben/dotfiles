@@ -1,11 +1,15 @@
 [alias]
     co = checkout
     cm = commit
-    st = status
+    st = status -bs --ignore-submodules=dirty
     br = branch
     type = cat-file -t
     dump = cat-file -p
-    cleanup = "!git branch --merged | grep -v '\\*\\|master\\|development' | xargs -n 1 git branch -d"
+    cleanup = "!git branch --merged | grep -v '\\*\\|master\\|development\\|develop' | xargs -n 1 git branch -d"
+    fl = log -u
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
 [user]
 	email = tleben@iteris.com
 	name = tleben
@@ -19,3 +23,6 @@
 	default = simple
 [core]
 	editor = vim
+	excludesfile = /Users/tleben/.gitignore_global
+[fetch]
+	prune = true

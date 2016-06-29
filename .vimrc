@@ -4,7 +4,7 @@ call pathogen#helptags()
 filetype plugin indent on
 syntax on
 
-set enc=utf-8
+set encoding=utf-8
 set number " show line number
 set hlsearch " highlight matches
 set incsearch " search as chars are entered
@@ -73,22 +73,29 @@ let g:pymode_folding=0
 let g:pymode_lint_on_write=0
 let g:pymode_lint_checkers=['pyflakes', 'pep8']
 let g:pymode_lint_ignore="E501"
+let g:pymode_indent=1
+let g:pymode_syntax=1
 let g:pymode_syntax_slow_sync=1
 let g:pymode_syntax_all=1
+let g:pymode_syntax_print_as_function=g:pymode_syntax_all
 " ...pymode key mapping
 nnoremap <silent><F6> :PymodeLint<CR> 
 nnoremap <silent><F7> :PymodeLintAuto<CR> 
 nnoremap <silent><F8> :PymodeLintToggle<CR>
 
 " nerdTree --------------------------------------------------------------------
-
 "open nerdtree if vim is started with no files specified
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " close vim if nerdTree is the only window open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" custom key mappings, leader = , ** comma
+" powerline -------------------------------------------------------------------
+"
+let g:Powerline_symbols='fancy'
+
+
+" ----------custom key mappings, leader = , ** comma
 let mapleader=","
 " <leader> c redraws scrren & removes search highlighting
 nnoremap <leader>c :nohl<CR><C-l>
@@ -110,9 +117,7 @@ endif
 
 set t_Co=256
 
-if has('gui_gnome')
-    set guifont=Ubuntu\ Mono 9.4
-endif
+set guifont=Monaco\ Pro\ for\ Powerline
 
 " solarized tweeks, ignored if not using colorscheme
 let g:solarized_termtrans=1
