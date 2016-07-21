@@ -30,6 +30,17 @@ autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
 " convert tabs to spaces on save
 autocmd BufWritePre *.py retab!
 
+" toggle relative & absolute lineno
+function! LinenoToggle()
+    if(&relativenumber == 'relativenumber')
+        set relativenumber
+    else
+        set norelativenumber
+    endif
+endfunc
+
+nnoremap <C-n> :call LinenoToggle()<cr>
+
 "<F2> toggle paste & nopaste
 set pastetoggle=<F2>
 
