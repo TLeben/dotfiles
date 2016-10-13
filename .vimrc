@@ -21,6 +21,8 @@ set shiftround " round indent to multiple of 'shiftwidth'
 set backspace=indent,eol,start
 set scrolloff=10 " scroll the window so we can alyways see ten lines around cursor
 set laststatus=2 " always show status line  
+set viminfo='100,f1
+
 " autosave
 autocmd BufLeave,CursorHold,CursorHoldI,FocusLost * silent! wa
 
