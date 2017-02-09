@@ -23,6 +23,6 @@
 	default = simple
 [core]
 	editor = vim
-	excludesfile = /Users/tleben/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [fetch]
 	prune = true
