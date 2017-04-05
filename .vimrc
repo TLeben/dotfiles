@@ -42,7 +42,6 @@ function! LinenoToggle()
     endif
 endfunc
 
-nnoremap <C-n> :call LinenoToggle()<cr>
 
 "<F2> toggle paste & nopaste
 set pastetoggle=<F2>
@@ -83,13 +82,13 @@ endif
 " python-mode -----------------------------------------------------------------
 " ...options
 let g:pymode_rope=0
-let g:pymode_folding=0
+let g:pymode_folding=1
 let g:pymode_lint_on_write=0
 let g:pymode_lint_checkers=['pyflakes', 'pep8']
 let g:pymode_lint_ignore="E501"
 let g:pymode_indent=1
 let g:pymode_syntax=1
-let g:pymode_syntax_slow_sync=1
+let g:pymode_syntax_slow_sync=0
 let g:pymode_syntax_all=1
 let g:pymode_syntax_print_as_function=g:pymode_syntax_all
 " ...pymode key mapping
@@ -108,19 +107,26 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 "
 let g:Powerline_symbols='fancy'
 
+" easymotion -------------------------------------------------------------------
+"
+"map <leader>
+let g:Powerline_symbols='fancy'
+
 
 " ----------custom key mappings, leader = , ** comma
 let mapleader=","
-" <leader> c redraws scrren & removes search highlighting
+" ,c -- redraws scrren & removes search highlighting
 nnoremap <leader>c :nohl<CR><C-l>
-"open explorer with ;;
-nnoremap <silent>;; :NERDTreeToggle<CR>
-"split and edit .vimrc
+",ev --  split and edit .vimrc
 nnoremap <leader>ev :split $MYVIMRC<CR>
-"source vimrc
+" ,sv -- source vimrc
 nnoremap <leader>sv :source $MYVIMRC<CR>
-"format JSON
+" ,j -- format JSON
 map <leader>j :%!python -m json.tool<CR>
+" ;; -- open NERDTree explorer with ;;
+nnoremap <silent>;; :NERDTreeToggle<CR>
+" ,n -- toggle relative & absolute lineno
+nnoremap <leader>n :call LinenoToggle()<cr>
 
 "---------------Appearance
 if has('gui_running')
