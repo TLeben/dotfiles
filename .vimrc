@@ -25,13 +25,13 @@ set viminfo='100,f1
 set clipboard=unnamed
 
 " autosave
-autocmd BufLeave,CursorHold,CursorHoldI,FocusLost * silent! wa
+" autocmd BufLeave,CursorHold,CursorHoldI,FocusLost * silent! wa
 
 " trim whitespace on save
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
 
 " convert tabs to spaces on save
-autocmd BufWritePre *.py retab!
+" autocmd BufWritePre *.py retab!
 
 " toggle relative & absolute lineno
 function! LinenoToggle()
@@ -81,20 +81,25 @@ endif
 
 " python-mode -----------------------------------------------------------------
 " ...options
-let g:pymode_rope=0
+let g:pymode=1
+let g:pymode_options=1
+let g:pymode_indent=1
 let g:pymode_folding=1
+let g:pymode_motion=1
+let g:pymode_syntax=1
+let g:pymode_syntax_all=1
+let g:pymode_syntax_print_as_function=0
+let g:pymode_syntax_slow_sync=1
+
+let g:pymode_rope=0
+let g:pymode_lint=0
 let g:pymode_lint_on_write=0
 let g:pymode_lint_checkers=['pyflakes', 'pep8']
 let g:pymode_lint_ignore="E501"
-let g:pymode_indent=1
-let g:pymode_syntax=1
-let g:pymode_syntax_slow_sync=0
-let g:pymode_syntax_all=1
-let g:pymode_syntax_print_as_function=g:pymode_syntax_all
 " ...pymode key mapping
-nnoremap <silent><F6> :PymodeLint<CR> 
-nnoremap <silent><F7> :PymodeLintAuto<CR> 
-nnoremap <silent><F8> :PymodeLintToggle<CR>
+" nnoremap <silent><F6> :PymodeLint<CR> 
+" nnoremap <silent><F7> :PymodeLintAuto<CR> 
+" nnoremap <silent><F8> :PymodeLintToggle<CR>
 
 " nerdTree --------------------------------------------------------------------
 "open nerdtree if vim is started with no files specified
