@@ -4,7 +4,7 @@ call pathogen#helptags()
 filetype plugin indent on
 syntax on
 
-set enc=utf-8
+set encoding=utf-8
 set number " show line number
 set hlsearch " highlight matches
 set incsearch " search as chars are entered
@@ -14,21 +14,35 @@ set ruler       " show cursor position in status bar
 set tabstop=4 " number of visual spaces per TAB
 set softtabstop=4 " number of spaces in tab when editing
 set textwidth=80 " wrap at 80 characters
-set shiftwidth=79 " lines longer than 79 columns will be broken
+set shiftwidth=4 " lines longer than 79 columns will be broken
 set expandtab " tabs are spaces
 set autoindent " align the new line indent with the prev line
 set shiftround " round indent to multiple of 'shiftwidth'
 set backspace=indent,eol,start
 set scrolloff=10 " scroll the window so we can alyways see ten lines around cursor
 set laststatus=2 " always show status line  
+set viminfo='100,f1
+set clipboard=unnamed
+
 " autosave
-autocmd BufLeave,CursorHold,CursorHoldI,FocusLost * silent! wa
+" autocmd BufLeave,CursorHold,CursorHoldI,FocusLost * silent! wa
 
 " trim whitespace on save
-autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
+" autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
+autocmd BufWritePre *.(py|go) :%s/\s\+$//e
 
 " convert tabs to spaces on save
-autocmd BufWritePre *.py retab!
+" autocmd BufWritePre *.py retab!
+
+" toggle relative & absolute lineno
+function! LinenoToggle()
+    if(&relativenumber == 'relativenumber')
+        set relativenumber
+    else
+        set norelativenumber
+    endif
+endfunc
+
 
 "<F2> toggle paste & nopaste
 set pastetoggle=<F2>
@@ -68,38 +82,63 @@ endif
 
 " python-mode -----------------------------------------------------------------
 " ...options
+let g:pymode=1
+let g:pymode_options=1
+let g:pymode_indent=1
+let g:pymode_folding=1
+let g:pymode_motion=1
+let g:pymode_syntax=1
+let g:pymode_syntax_all=1
+let g:pymode_syntax_print_as_function=0
+let g:pymode_syntax_slow_sync=1
+
 let g:pymode_rope=0
-let g:pymode_folding=0
+let g:pymode_lint=0
 let g:pymode_lint_on_write=0
 let g:pymode_lint_checkers=['pyflakes', 'pep8']
 let g:pymode_lint_ignore="E501"
-let g:pymode_syntax_slow_sync=1
-let g:pymode_syntax_all=1
 " ...pymode key mapping
-nnoremap <silent><F6> :PymodeLint<CR> 
-nnoremap <silent><F7> :PymodeLintAuto<CR> 
-nnoremap <silent><F8> :PymodeLintToggle<CR>
+" nnoremap <silent><F6> :PymodeLint<CR> 
+" nnoremap <silent><F7> :PymodeLintAuto<CR> 
+" nnoremap <silent><F8> :PymodeLintToggle<CR>
+
+" vim-go ----------------------------------------------------------------------
+let g:go_highlight_types=1
+let g:go_highlight_fields=1
+let g:go_highlight_operators=1
+let g:go_highlight_function_calls=1
 
 " nerdTree --------------------------------------------------------------------
-
 "open nerdtree if vim is started with no files specified
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " close vim if nerdTree is the only window open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" custom key mappings, leader = , ** comma
+" powerline -------------------------------------------------------------------
+"
+let g:Powerline_symbols='fancy'
+
+" easymotion -------------------------------------------------------------------
+"
+"map <leader>
+let g:Powerline_symbols='fancy'
+
+
+" ----------custom key mappings, leader = , ** comma
 let mapleader=","
-" <leader> c redraws scrren & removes search highlighting
+" ,c -- redraws scrren & removes search highlighting
 nnoremap <leader>c :nohl<CR><C-l>
-"open explorer with ;;
-nnoremap <silent>;; :NERDTreeToggle<CR>
-"split and edit .vimrc
+",ev --  split and edit .vimrc
 nnoremap <leader>ev :split $MYVIMRC<CR>
-"source vimrc
+" ,sv -- source vimrc
 nnoremap <leader>sv :source $MYVIMRC<CR>
-"format JSON
+" ,j -- format JSON
 map <leader>j :%!python -m json.tool<CR>
+" ;; -- open NERDTree explorer with ;;
+nnoremap <silent>;; :NERDTreeToggle<CR>
+" ,n -- toggle relative & absolute lineno
+nnoremap <leader>n :call LinenoToggle()<cr>
 
 "---------------Appearance
 if has('gui_running')
@@ -110,9 +149,7 @@ endif
 
 set t_Co=256
 
-if has('gui_gnome')
-    set guifont=Ubuntu\ Mono 9.4
-endif
+set guifont=Monaco\ Pro\ for\ Powerline
 
 " solarized tweeks, ignored if not using colorscheme
 let g:solarized_termtrans=1

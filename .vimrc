@@ -14,7 +14,7 @@ set ruler       " show cursor position in status bar
 set tabstop=4 " number of visual spaces per TAB
 set softtabstop=4 " number of spaces in tab when editing
 set textwidth=80 " wrap at 80 characters
-set shiftwidth=79 " lines longer than 79 columns will be broken
+set shiftwidth=4 " lines longer than 79 columns will be broken
 set expandtab " tabs are spaces
 set autoindent " align the new line indent with the prev line
 set shiftround " round indent to multiple of 'shiftwidth'
@@ -28,7 +28,8 @@ set clipboard=unnamed
 " autocmd BufLeave,CursorHold,CursorHoldI,FocusLost * silent! wa
 
 " trim whitespace on save
-autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
+" autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
+autocmd BufWritePre *.(py|go) :%s/\s\+$//e
 
 " convert tabs to spaces on save
 " autocmd BufWritePre *.py retab!
@@ -100,6 +101,12 @@ let g:pymode_lint_ignore="E501"
 " nnoremap <silent><F6> :PymodeLint<CR> 
 " nnoremap <silent><F7> :PymodeLintAuto<CR> 
 " nnoremap <silent><F8> :PymodeLintToggle<CR>
+
+" vim-go ----------------------------------------------------------------------
+let g:go_highlight_types=1
+let g:go_highlight_fields=1
+let g:go_highlight_operators=1
+let g:go_highlight_function_calls=1
 
 " nerdTree --------------------------------------------------------------------
 "open nerdtree if vim is started with no files specified
